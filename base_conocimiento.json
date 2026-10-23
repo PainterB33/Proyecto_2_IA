@@ -1,0 +1,242 @@
+{
+  "reglas": [
+    {
+      "id": "RESP_01",
+      "antecedentes": [
+        "Fiebre",
+        "Escalofrios"
+      ],
+      "consecuente": "Sig_Cuadro_Febrile"
+    },
+    {
+      "id": "RESP_02",
+      "antecedentes": [
+        "Dolor_Garganta",
+        "Congestion_Nasal"
+      ],
+      "consecuente": "Sig_Inflamacion_Vias_Altas"
+    },
+    {
+      "id": "RESP_03",
+      "antecedentes": [
+        "Tos_Productiva",
+        "Sibilancias"
+      ],
+      "consecuente": "Sig_Compromiso_Vias_Bajas"
+    },
+    {
+      "id": "RESP_04",
+      "antecedentes": [
+        "Dificultad_Respiratoria",
+        "Taquipnea"
+      ],
+      "consecuente": "Sig_Distres_Respiratorio"
+    },
+    {
+      "id": "RESP_05",
+      "antecedentes": [
+        "Perdida_Peso",
+        "Sudoracion_Nocturna"
+      ],
+      "consecuente": "Sig_Proceso_Sistemico"
+    },
+    {
+      "id": "RESP_06",
+      "antecedentes": [
+        "Dolor_Muscular",
+        "Cefalea",
+        "Dolor_Articular"
+      ],
+      "consecuente": "Sig_Dolor_Sistemico"
+    },
+    {
+      "id": "RESP_07",
+      "antecedentes": [
+        "Sibilancias",
+        "Episodios_Recurrentes"
+      ],
+      "consecuente": "Sig_Broncoespasmo_Recurrente"
+    },
+    {
+      "id": "RESP_08",
+      "antecedentes": [
+        "Sig_Cuadro_Febrile",
+        "Sig_Dolor_Sistemico",
+        "Inicio_Subito"
+      ],
+      "consecuente": "Sin_Sindrome_Gripal"
+    },
+    {
+      "id": "RESP_09",
+      "antecedentes": [
+        "Sig_Inflamacion_Vias_Altas",
+        "Tos_Seca"
+      ],
+      "consecuente": "Sin_Sindrome_Respiratorio_Alto"
+    },
+    {
+      "id": "RESP_10",
+      "antecedentes": [
+        "Sig_Compromiso_Vias_Bajas",
+        "Congestion_Nasal"
+      ],
+      "consecuente": "Sin_Sindrome_Bronquial"
+    },
+    {
+      "id": "RESP_11",
+      "antecedentes": [
+        "Sig_Distres_Respiratorio",
+        "Crepitantes_Pulmonares",
+        "Fiebre"
+      ],
+      "consecuente": "Sin_Sindrome_Neumonico"
+    },
+    {
+      "id": "RESP_12",
+      "antecedentes": [
+        "Sig_Proceso_Sistemico",
+        "Fatiga",
+        "Perdida_Apetito"
+      ],
+      "consecuente": "Sin_Sindrome_Consuntivo"
+    },
+    {
+      "id": "RESP_13",
+      "antecedentes": [
+        "Sig_Broncoespasmo_Recurrente",
+        "Tos_Seca"
+      ],
+      "consecuente": "Sin_Crisis_Asmatica"
+    },
+    {
+      "id": "RESP_14",
+      "antecedentes": [
+        "Sin_Sindrome_Gripal",
+        "Tos_Seca"
+      ],
+      "consecuente": "Dx_Gripe"
+    },
+    {
+      "id": "RESP_15",
+      "antecedentes": [
+        "Sin_Sindrome_Gripal",
+        "Perdida_Olfato_Gusto"
+      ],
+      "consecuente": "Dx_COVID19"
+    },
+    {
+      "id": "RESP_16",
+      "antecedentes": [
+        "Sin_Sindrome_Respiratorio_Alto",
+        "Fatiga"
+      ],
+      "consecuente": "Dx_Resfriado_Comun"
+    },
+    {
+      "id": "RESP_17",
+      "antecedentes": [
+        "Sin_Sindrome_Bronquial",
+        "Dolor_Garganta"
+      ],
+      "consecuente": "Dx_Bronquitis"
+    },
+    {
+      "id": "RESP_18",
+      "antecedentes": [
+        "Sin_Sindrome_Neumonico",
+        "Tos_Productiva",
+        "Dolor_Toracico"
+      ],
+      "consecuente": "Dx_Neumonia"
+    },
+    {
+      "id": "RESP_19",
+      "antecedentes": [
+        "Sin_Sindrome_Consuntivo",
+        "Tos_Prolongada"
+      ],
+      "consecuente": "Dx_Tuberculosis"
+    },
+    {
+      "id": "RESP_20",
+      "antecedentes": [
+        "Sin_Crisis_Asmatica",
+        "Dificultad_Respiratoria"
+      ],
+      "consecuente": "Dx_Asma"
+    },
+    {
+      "id": "RESP_21",
+      "antecedentes": [
+        "Dx_Neumonia",
+        "Saturacion_Oxigeno_Baja"
+      ],
+      "consecuente": "Alerta_Gravedad_Extrema"
+    },
+    {
+      "id": "RESP_22",
+      "antecedentes": [
+        "Dx_Neumonia",
+        "Cianosis"
+      ],
+      "consecuente": "Alerta_Gravedad_Extrema"
+    },
+    {
+      "id": "RESP_23",
+      "antecedentes": [
+        "Dx_Neumonia",
+        "Confusion"
+      ],
+      "consecuente": "Alerta_Gravedad_Extrema"
+    },
+    {
+      "id": "RESP_24",
+      "antecedentes": [
+        "Dx_COVID19",
+        "Dificultad_Respiratoria",
+        "Saturacion_Oxigeno_Baja"
+      ],
+      "consecuente": "Alerta_Gravedad_Extrema"
+    },
+    {
+      "id": "RESP_25",
+      "antecedentes": [
+        "Dx_Tuberculosis",
+        "Hemoptisis"
+      ],
+      "consecuente": "Alerta_Riesgo_Alto"
+    },
+    {
+      "id": "RESP_26",
+      "antecedentes": [
+        "Dx_Asma",
+        "Saturacion_Oxigeno_Baja"
+      ],
+      "consecuente": "Alerta_Crisis_Asmatica_Grave"
+    },
+    {
+      "id": "RESP_27",
+      "antecedentes": [
+        "Dx_Bronquitis",
+        "Dificultad_Respiratoria"
+      ],
+      "consecuente": "Alerta_Progresion_Pulmonar"
+    },
+    {
+      "id": "RESP_28",
+      "antecedentes": [
+        "Dx_Gripe",
+        "Dificultad_Respiratoria"
+      ],
+      "consecuente": "Alerta_Complicacion_Respiratoria"
+    },
+    {
+      "id": "RESP_29",
+      "antecedentes": [
+        "Dx_Resfriado_Comun",
+        "Dificultad_Respiratoria"
+      ],
+      "consecuente": "Alerta_Complicacion_Respiratoria"
+    }
+  ]
+}
