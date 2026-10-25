@@ -111,57 +111,49 @@
     {
       "id": "RESP_14",
       "antecedentes": [
-        "Sin_Sindrome_Gripal",
-        "Tos_Seca"
+        "PreDx_Patron_Gripal"
       ],
       "consecuente": "Dx_Gripe"
     },
     {
       "id": "RESP_15",
       "antecedentes": [
-        "Sin_Sindrome_Gripal",
-        "Perdida_Olfato_Gusto"
+        "PreDx_Patron_COVID19"
       ],
       "consecuente": "Dx_COVID19"
     },
     {
       "id": "RESP_16",
       "antecedentes": [
-        "Sin_Sindrome_Respiratorio_Alto",
-        "Fatiga"
+        "PreDx_Patron_Resfriado"
       ],
       "consecuente": "Dx_Resfriado_Comun"
     },
     {
       "id": "RESP_17",
       "antecedentes": [
-        "Sin_Sindrome_Bronquial",
-        "Dolor_Garganta"
+        "PreDx_Patron_Bronquitis"
       ],
       "consecuente": "Dx_Bronquitis"
     },
     {
       "id": "RESP_18",
       "antecedentes": [
-        "Sin_Sindrome_Neumonico",
-        "Tos_Productiva",
-        "Dolor_Toracico"
+        "PreDx_Patron_Neumonia"
       ],
       "consecuente": "Dx_Neumonia"
     },
     {
       "id": "RESP_19",
       "antecedentes": [
-        "Sin_Sindrome_Consuntivo",
-        "Tos_Prolongada"
+        "PreDx_Patron_Tuberculosis"
       ],
       "consecuente": "Dx_Tuberculosis"
     },
     {
       "id": "RESP_20",
       "antecedentes": [
-        "Sin_Crisis_Asmatica",
-        "Dificultad_Respiratoria"
+        "PreDx_Patron_Asma"
       ],
       "consecuente": "Dx_Asma"
     },
@@ -237,6 +229,179 @@
         "Dificultad_Respiratoria"
       ],
       "consecuente": "Alerta_Complicacion_Respiratoria"
+    },
+    {
+      "id": "RESP_30",
+      "antecedentes": [
+        "Sin_Sindrome_Gripal",
+        "Tos_Seca"
+      ],
+      "consecuente": "PreDx_Patron_Gripal"
+    },
+    {
+      "id": "RESP_31",
+      "antecedentes": [
+        "Sin_Sindrome_Gripal",
+        "Perdida_Olfato_Gusto"
+      ],
+      "consecuente": "PreDx_Patron_COVID19"
+    },
+    {
+      "id": "RESP_32",
+      "antecedentes": [
+        "Sin_Sindrome_Respiratorio_Alto",
+        "Fatiga"
+      ],
+      "consecuente": "PreDx_Patron_Resfriado"
+    },
+    {
+      "id": "RESP_33",
+      "antecedentes": [
+        "Sin_Sindrome_Bronquial",
+        "Dolor_Garganta"
+      ],
+      "consecuente": "PreDx_Patron_Bronquitis"
+    },
+    {
+      "id": "RESP_34",
+      "antecedentes": [
+        "Sin_Sindrome_Neumonico",
+        "Tos_Productiva",
+        "Dolor_Toracico"
+      ],
+      "consecuente": "PreDx_Patron_Neumonia"
+    },
+    {
+      "id": "RESP_35",
+      "antecedentes": [
+        "Sin_Sindrome_Consuntivo",
+        "Tos_Prolongada"
+      ],
+      "consecuente": "PreDx_Patron_Tuberculosis"
+    },
+    {
+      "id": "RESP_36",
+      "antecedentes": [
+        "Sin_Crisis_Asmatica",
+        "Dificultad_Respiratoria"
+      ],
+      "consecuente": "PreDx_Patron_Asma"
+    },
+    {
+      "id": "RESP_37",
+      "antecedentes": [
+        "Fiebre",
+        "Dolor_Muscular"
+      ],
+      "consecuente": "Sig_Sintomas_Generales"
+    },
+    {
+      "id": "RESP_38",
+      "antecedentes": [
+        "Congestion_Nasal",
+        "Tos_Seca"
+      ],
+      "consecuente": "Sig_Irritacion_Respiratoria_Alta"
+    },
+    {
+      "id": "RESP_39",
+      "antecedentes": [
+        "Tos_Productiva",
+        "Dolor_Toracico"
+      ],
+      "consecuente": "Sig_Tos_Con_Dolor_Toracico"
+    },
+    {
+      "id": "RESP_40",
+      "antecedentes": [
+        "Taquipnea",
+        "Crepitantes_Pulmonares"
+      ],
+      "consecuente": "Sig_Hallazgos_Pulmonares"
+    },
+    {
+      "id": "RESP_41",
+      "antecedentes": [
+        "Perdida_Peso",
+        "Fatiga"
+      ],
+      "consecuente": "Sig_Deterioro_General"
+    },
+    {
+      "id": "RESP_42",
+      "antecedentes": [
+        "Tos_Seca",
+        "Sibilancias"
+      ],
+      "consecuente": "Sig_Obstruccion_Respiratoria"
+    },
+    {
+      "id": "RESP_43",
+      "antecedentes": [
+        "Cefalea",
+        "Dolor_Muscular"
+      ],
+      "consecuente": "Sig_Malestar_General"
+    },
+    {
+      "id": "RESP_44",
+      "antecedentes": [
+        "Sig_Sintomas_Generales",
+        "Sig_Malestar_General",
+        "Inicio_Subito"
+      ],
+      "consecuente": "Sin_Sindrome_Gripal"
+    },
+    {
+      "id": "RESP_45",
+      "antecedentes": [
+        "Sig_Irritacion_Respiratoria_Alta",
+        "Dolor_Garganta"
+      ],
+      "consecuente": "Sin_Sindrome_Respiratorio_Alto"
+    },
+    {
+      "id": "RESP_46",
+      "antecedentes": [
+        "Sig_Tos_Con_Dolor_Toracico",
+        "Sibilancias"
+      ],
+      "consecuente": "Sin_Sindrome_Bronquial"
+    },
+    {
+      "id": "RESP_47",
+      "antecedentes": [
+        "Sig_Hallazgos_Pulmonares",
+        "Dificultad_Respiratoria",
+        "Fiebre"
+      ],
+      "consecuente": "Sin_Sindrome_Neumonico"
+    },
+    {
+      "id": "RESP_48",
+      "antecedentes": [
+        "Sig_Deterioro_General",
+        "Sudoracion_Nocturna",
+        "Perdida_Apetito"
+      ],
+      "consecuente": "Sin_Sindrome_Consuntivo"
+    },
+    {
+      "id": "RESP_49",
+      "antecedentes": [
+        "Sig_Obstruccion_Respiratoria",
+        "Episodios_Recurrentes"
+      ],
+      "consecuente": "Sin_Crisis_Asmatica"
+    },
+    {
+      "id": "RESP_50",
+      "antecedentes": [
+        "Sig_Sintomas_Generales",
+        "Sig_Malestar_General",
+        "Escalofrios"
+      ],
+      "consecuente": "Sin_Sindrome_Gripal"
     }
   ]
 }
