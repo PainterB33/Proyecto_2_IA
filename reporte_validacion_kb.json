@@ -21,6 +21,7 @@
     "Dx_Resfriado_Comun": 4,
     "Dx_Tuberculosis": 4
   },
+  "cantidad_casos_clinicos": 11,
   "casos_clinicos": [
     {
       "nombre": "Gripe",
@@ -262,6 +263,344 @@
       "reglas_activadas": [
         "RESP_01"
       ]
+    },
+    {
+      "nombre": "Resfriado con alerta",
+      "hechos": [
+        "Dolor_Garganta",
+        "Congestion_Nasal",
+        "Tos_Seca",
+        "Fatiga",
+        "Dificultad_Respiratoria"
+      ],
+      "objetivo": "Alerta_Complicacion_Respiratoria",
+      "esperado": true,
+      "obtenido": true,
+      "aprobado": true,
+      "traza": [
+        {
+          "regla": "RESP_02",
+          "hecho": "Sig_Inflamacion_Vias_Altas"
+        },
+        {
+          "regla": "RESP_09",
+          "hecho": "Sin_Sindrome_Respiratorio_Alto"
+        },
+        {
+          "regla": "RESP_32",
+          "hecho": "PreDx_Patron_Resfriado"
+        },
+        {
+          "regla": "RESP_38",
+          "hecho": "Sig_Irritacion_Respiratoria_Alta"
+        },
+        {
+          "regla": "RESP_16",
+          "hecho": "Dx_Resfriado_Comun"
+        },
+        {
+          "regla": "RESP_29",
+          "hecho": "Alerta_Complicacion_Respiratoria"
+        }
+      ],
+      "reglas_activadas": [
+        "RESP_02",
+        "RESP_09",
+        "RESP_16",
+        "RESP_29",
+        "RESP_32",
+        "RESP_38",
+        "RESP_45"
+      ]
+    },
+    {
+      "nombre": "Bronquitis con alerta",
+      "hechos": [
+        "Tos_Productiva",
+        "Sibilancias",
+        "Congestion_Nasal",
+        "Dolor_Garganta",
+        "Dificultad_Respiratoria",
+        "Dolor_Toracico"
+      ],
+      "objetivo": "Alerta_Progresion_Pulmonar",
+      "esperado": true,
+      "obtenido": true,
+      "aprobado": true,
+      "traza": [
+        {
+          "regla": "RESP_02",
+          "hecho": "Sig_Inflamacion_Vias_Altas"
+        },
+        {
+          "regla": "RESP_03",
+          "hecho": "Sig_Compromiso_Vias_Bajas"
+        },
+        {
+          "regla": "RESP_10",
+          "hecho": "Sin_Sindrome_Bronquial"
+        },
+        {
+          "regla": "RESP_33",
+          "hecho": "PreDx_Patron_Bronquitis"
+        },
+        {
+          "regla": "RESP_39",
+          "hecho": "Sig_Tos_Con_Dolor_Toracico"
+        },
+        {
+          "regla": "RESP_17",
+          "hecho": "Dx_Bronquitis"
+        },
+        {
+          "regla": "RESP_27",
+          "hecho": "Alerta_Progresion_Pulmonar"
+        }
+      ],
+      "reglas_activadas": [
+        "RESP_02",
+        "RESP_03",
+        "RESP_10",
+        "RESP_17",
+        "RESP_27",
+        "RESP_33",
+        "RESP_39",
+        "RESP_46"
+      ]
+    },
+    {
+      "nombre": "Asma con alerta",
+      "hechos": [
+        "Sibilancias",
+        "Episodios_Recurrentes",
+        "Tos_Seca",
+        "Dificultad_Respiratoria",
+        "Saturacion_Oxigeno_Baja"
+      ],
+      "objetivo": "Alerta_Crisis_Asmatica_Grave",
+      "esperado": true,
+      "obtenido": true,
+      "aprobado": true,
+      "traza": [
+        {
+          "regla": "RESP_07",
+          "hecho": "Sig_Broncoespasmo_Recurrente"
+        },
+        {
+          "regla": "RESP_13",
+          "hecho": "Sin_Crisis_Asmatica"
+        },
+        {
+          "regla": "RESP_36",
+          "hecho": "PreDx_Patron_Asma"
+        },
+        {
+          "regla": "RESP_42",
+          "hecho": "Sig_Obstruccion_Respiratoria"
+        },
+        {
+          "regla": "RESP_20",
+          "hecho": "Dx_Asma"
+        },
+        {
+          "regla": "RESP_26",
+          "hecho": "Alerta_Crisis_Asmatica_Grave"
+        }
+      ],
+      "reglas_activadas": [
+        "RESP_07",
+        "RESP_13",
+        "RESP_20",
+        "RESP_26",
+        "RESP_36",
+        "RESP_42",
+        "RESP_49"
+      ]
+    },
+    {
+      "nombre": "Neumonia: cianosis y confusion",
+      "hechos": [
+        "Fiebre",
+        "Dificultad_Respiratoria",
+        "Taquipnea",
+        "Crepitantes_Pulmonares",
+        "Tos_Productiva",
+        "Dolor_Toracico",
+        "Cianosis",
+        "Confusion"
+      ],
+      "objetivo": "Alerta_Gravedad_Extrema",
+      "esperado": true,
+      "obtenido": true,
+      "aprobado": true,
+      "traza": [
+        {
+          "regla": "RESP_04",
+          "hecho": "Sig_Distres_Respiratorio"
+        },
+        {
+          "regla": "RESP_11",
+          "hecho": "Sin_Sindrome_Neumonico"
+        },
+        {
+          "regla": "RESP_34",
+          "hecho": "PreDx_Patron_Neumonia"
+        },
+        {
+          "regla": "RESP_39",
+          "hecho": "Sig_Tos_Con_Dolor_Toracico"
+        },
+        {
+          "regla": "RESP_40",
+          "hecho": "Sig_Hallazgos_Pulmonares"
+        },
+        {
+          "regla": "RESP_18",
+          "hecho": "Dx_Neumonia"
+        },
+        {
+          "regla": "RESP_22",
+          "hecho": "Alerta_Gravedad_Extrema"
+        }
+      ],
+      "reglas_activadas": [
+        "RESP_04",
+        "RESP_11",
+        "RESP_18",
+        "RESP_22",
+        "RESP_23",
+        "RESP_34",
+        "RESP_39",
+        "RESP_40",
+        "RESP_47"
+      ]
+    },
+    {
+      "nombre": "COVID-19 con alerta",
+      "hechos": [
+        "Fiebre",
+        "Escalofrios",
+        "Dolor_Muscular",
+        "Cefalea",
+        "Dolor_Articular",
+        "Inicio_Subito",
+        "Perdida_Olfato_Gusto",
+        "Dificultad_Respiratoria",
+        "Saturacion_Oxigeno_Baja"
+      ],
+      "objetivo": "Alerta_Gravedad_Extrema",
+      "esperado": true,
+      "obtenido": true,
+      "aprobado": true,
+      "traza": [
+        {
+          "regla": "RESP_01",
+          "hecho": "Sig_Cuadro_Febrile"
+        },
+        {
+          "regla": "RESP_06",
+          "hecho": "Sig_Dolor_Sistemico"
+        },
+        {
+          "regla": "RESP_08",
+          "hecho": "Sin_Sindrome_Gripal"
+        },
+        {
+          "regla": "RESP_31",
+          "hecho": "PreDx_Patron_COVID19"
+        },
+        {
+          "regla": "RESP_37",
+          "hecho": "Sig_Sintomas_Generales"
+        },
+        {
+          "regla": "RESP_43",
+          "hecho": "Sig_Malestar_General"
+        },
+        {
+          "regla": "RESP_15",
+          "hecho": "Dx_COVID19"
+        },
+        {
+          "regla": "RESP_24",
+          "hecho": "Alerta_Gravedad_Extrema"
+        }
+      ],
+      "reglas_activadas": [
+        "RESP_01",
+        "RESP_06",
+        "RESP_08",
+        "RESP_15",
+        "RESP_24",
+        "RESP_31",
+        "RESP_37",
+        "RESP_43",
+        "RESP_44",
+        "RESP_50"
+      ]
+    },
+    {
+      "nombre": "Gripe con alerta",
+      "hechos": [
+        "Fiebre",
+        "Escalofrios",
+        "Dolor_Muscular",
+        "Cefalea",
+        "Dolor_Articular",
+        "Inicio_Subito",
+        "Tos_Seca",
+        "Dificultad_Respiratoria"
+      ],
+      "objetivo": "Alerta_Complicacion_Respiratoria",
+      "esperado": true,
+      "obtenido": true,
+      "aprobado": true,
+      "traza": [
+        {
+          "regla": "RESP_01",
+          "hecho": "Sig_Cuadro_Febrile"
+        },
+        {
+          "regla": "RESP_06",
+          "hecho": "Sig_Dolor_Sistemico"
+        },
+        {
+          "regla": "RESP_08",
+          "hecho": "Sin_Sindrome_Gripal"
+        },
+        {
+          "regla": "RESP_30",
+          "hecho": "PreDx_Patron_Gripal"
+        },
+        {
+          "regla": "RESP_37",
+          "hecho": "Sig_Sintomas_Generales"
+        },
+        {
+          "regla": "RESP_43",
+          "hecho": "Sig_Malestar_General"
+        },
+        {
+          "regla": "RESP_14",
+          "hecho": "Dx_Gripe"
+        },
+        {
+          "regla": "RESP_28",
+          "hecho": "Alerta_Complicacion_Respiratoria"
+        }
+      ],
+      "reglas_activadas": [
+        "RESP_01",
+        "RESP_06",
+        "RESP_08",
+        "RESP_14",
+        "RESP_28",
+        "RESP_30",
+        "RESP_37",
+        "RESP_43",
+        "RESP_44",
+        "RESP_50"
+      ]
     }
   ],
   "casos_limite": [
@@ -282,38 +621,13 @@
       "aprobado": true
     }
   ],
-  "cobertura_5_casos": {
-    "activadas": 26,
+  "cobertura_casos": {
+    "activadas": 50,
     "total": 50,
-    "porcentaje": 52.0,
-    "no_activadas": [
-      "RESP_02",
-      "RESP_03",
-      "RESP_07",
-      "RESP_09",
-      "RESP_10",
-      "RESP_13",
-      "RESP_16",
-      "RESP_17",
-      "RESP_20",
-      "RESP_22",
-      "RESP_23",
-      "RESP_24",
-      "RESP_26",
-      "RESP_27",
-      "RESP_28",
-      "RESP_29",
-      "RESP_32",
-      "RESP_33",
-      "RESP_36",
-      "RESP_38",
-      "RESP_42",
-      "RESP_45",
-      "RESP_46",
-      "RESP_49"
-    ]
+    "porcentaje": 100.0,
+    "no_activadas": []
   },
   "errores": [],
   "aprobado": true,
-  "nota": "Validación formal de un modelo académico; no confirma diagnósticos ni exactitud clínica. Se usa un evaluador Forward independiente, no los motores del equipo."
+  "nota": "Validacion formal de un modelo academico; no confirma diagnosticos ni exactitud clinica. Se usa un evaluador Forward independiente, no los motores del equipo."
 }
