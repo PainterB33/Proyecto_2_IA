@@ -1,0 +1,128 @@
+TRAZAS DEL MOTOR HACIA ADELANTE (FORWARD CHAINING)
+====================================================
+
+Caso 1: Gripe
+Hechos iniciales: Fiebre, Escalofrios, Dolor_Muscular, Cefalea, Dolor_Articular, Inicio_Subito, Tos_Seca
+Objetivo: Dx_Gripe
+Resultado: True | pasadas: 2 | reglas disparadas: 7
+  Paso 1: RESP_01: Escalofrios AND Fiebre -> Sig_Cuadro_Febrile
+  Paso 2: RESP_06: Cefalea AND Dolor_Articular AND Dolor_Muscular -> Sig_Dolor_Sistemico
+  Paso 3: RESP_08: Inicio_Subito AND Sig_Cuadro_Febrile AND Sig_Dolor_Sistemico -> Sin_Sindrome_Gripal
+  Paso 4: RESP_30: Sin_Sindrome_Gripal AND Tos_Seca -> PreDx_Patron_Gripal
+  Paso 5: RESP_37: Dolor_Muscular AND Fiebre -> Sig_Sintomas_Generales
+  Paso 6: RESP_43: Cefalea AND Dolor_Muscular -> Sig_Malestar_General
+  Paso 7: RESP_14: PreDx_Patron_Gripal -> Dx_Gripe
+
+Caso 2: COVID-19
+Hechos iniciales: Fiebre, Escalofrios, Dolor_Muscular, Cefalea, Dolor_Articular, Inicio_Subito, Perdida_Olfato_Gusto
+Objetivo: Dx_COVID19
+Resultado: True | pasadas: 2 | reglas disparadas: 7
+  Paso 1: RESP_01: Escalofrios AND Fiebre -> Sig_Cuadro_Febrile
+  Paso 2: RESP_06: Cefalea AND Dolor_Articular AND Dolor_Muscular -> Sig_Dolor_Sistemico
+  Paso 3: RESP_08: Inicio_Subito AND Sig_Cuadro_Febrile AND Sig_Dolor_Sistemico -> Sin_Sindrome_Gripal
+  Paso 4: RESP_31: Perdida_Olfato_Gusto AND Sin_Sindrome_Gripal -> PreDx_Patron_COVID19
+  Paso 5: RESP_37: Dolor_Muscular AND Fiebre -> Sig_Sintomas_Generales
+  Paso 6: RESP_43: Cefalea AND Dolor_Muscular -> Sig_Malestar_General
+  Paso 7: RESP_15: PreDx_Patron_COVID19 -> Dx_COVID19
+
+Caso 3: Neumonia con alerta
+Hechos iniciales: Fiebre, Dificultad_Respiratoria, Taquipnea, Crepitantes_Pulmonares, Tos_Productiva, Dolor_Toracico, Saturacion_Oxigeno_Baja
+Objetivo: Alerta_Gravedad_Extrema
+Resultado: True | pasadas: 2 | reglas disparadas: 7
+  Paso 1: RESP_04: Dificultad_Respiratoria AND Taquipnea -> Sig_Distres_Respiratorio
+  Paso 2: RESP_11: Crepitantes_Pulmonares AND Fiebre AND Sig_Distres_Respiratorio -> Sin_Sindrome_Neumonico
+  Paso 3: RESP_34: Dolor_Toracico AND Sin_Sindrome_Neumonico AND Tos_Productiva -> PreDx_Patron_Neumonia
+  Paso 4: RESP_39: Dolor_Toracico AND Tos_Productiva -> Sig_Tos_Con_Dolor_Toracico
+  Paso 5: RESP_40: Crepitantes_Pulmonares AND Taquipnea -> Sig_Hallazgos_Pulmonares
+  Paso 6: RESP_18: PreDx_Patron_Neumonia -> Dx_Neumonia
+  Paso 7: RESP_21: Dx_Neumonia AND Saturacion_Oxigeno_Baja -> Alerta_Gravedad_Extrema
+
+Caso 4: Tuberculosis con alerta
+Hechos iniciales: Perdida_Peso, Sudoracion_Nocturna, Fatiga, Perdida_Apetito, Tos_Prolongada, Hemoptisis
+Objetivo: Alerta_Riesgo_Alto
+Resultado: True | pasadas: 2 | reglas disparadas: 6
+  Paso 1: RESP_05: Perdida_Peso AND Sudoracion_Nocturna -> Sig_Proceso_Sistemico
+  Paso 2: RESP_12: Fatiga AND Perdida_Apetito AND Sig_Proceso_Sistemico -> Sin_Sindrome_Consuntivo
+  Paso 3: RESP_35: Sin_Sindrome_Consuntivo AND Tos_Prolongada -> PreDx_Patron_Tuberculosis
+  Paso 4: RESP_41: Fatiga AND Perdida_Peso -> Sig_Deterioro_General
+  Paso 5: RESP_19: PreDx_Patron_Tuberculosis -> Dx_Tuberculosis
+  Paso 6: RESP_25: Dx_Tuberculosis AND Hemoptisis -> Alerta_Riesgo_Alto
+
+Caso 5: No demostrable
+Hechos iniciales: Fiebre, Escalofrios, Tos_Seca
+Objetivo: Dx_COVID19
+Resultado: False | pasadas: 2 | reglas disparadas: 1
+  Paso 1: RESP_01: Escalofrios AND Fiebre -> Sig_Cuadro_Febrile
+
+Caso 6: Resfriado con alerta
+Hechos iniciales: Dolor_Garganta, Congestion_Nasal, Tos_Seca, Fatiga, Dificultad_Respiratoria
+Objetivo: Alerta_Complicacion_Respiratoria
+Resultado: True | pasadas: 2 | reglas disparadas: 6
+  Paso 1: RESP_02: Congestion_Nasal AND Dolor_Garganta -> Sig_Inflamacion_Vias_Altas
+  Paso 2: RESP_09: Sig_Inflamacion_Vias_Altas AND Tos_Seca -> Sin_Sindrome_Respiratorio_Alto
+  Paso 3: RESP_32: Fatiga AND Sin_Sindrome_Respiratorio_Alto -> PreDx_Patron_Resfriado
+  Paso 4: RESP_38: Congestion_Nasal AND Tos_Seca -> Sig_Irritacion_Respiratoria_Alta
+  Paso 5: RESP_16: PreDx_Patron_Resfriado -> Dx_Resfriado_Comun
+  Paso 6: RESP_29: Dificultad_Respiratoria AND Dx_Resfriado_Comun -> Alerta_Complicacion_Respiratoria
+
+Caso 7: Bronquitis con alerta
+Hechos iniciales: Tos_Productiva, Sibilancias, Congestion_Nasal, Dolor_Garganta, Dificultad_Respiratoria, Dolor_Toracico
+Objetivo: Alerta_Progresion_Pulmonar
+Resultado: True | pasadas: 2 | reglas disparadas: 7
+  Paso 1: RESP_02: Congestion_Nasal AND Dolor_Garganta -> Sig_Inflamacion_Vias_Altas
+  Paso 2: RESP_03: Sibilancias AND Tos_Productiva -> Sig_Compromiso_Vias_Bajas
+  Paso 3: RESP_10: Congestion_Nasal AND Sig_Compromiso_Vias_Bajas -> Sin_Sindrome_Bronquial
+  Paso 4: RESP_33: Dolor_Garganta AND Sin_Sindrome_Bronquial -> PreDx_Patron_Bronquitis
+  Paso 5: RESP_39: Dolor_Toracico AND Tos_Productiva -> Sig_Tos_Con_Dolor_Toracico
+  Paso 6: RESP_17: PreDx_Patron_Bronquitis -> Dx_Bronquitis
+  Paso 7: RESP_27: Dificultad_Respiratoria AND Dx_Bronquitis -> Alerta_Progresion_Pulmonar
+
+Caso 8: Asma con alerta
+Hechos iniciales: Sibilancias, Episodios_Recurrentes, Tos_Seca, Dificultad_Respiratoria, Saturacion_Oxigeno_Baja
+Objetivo: Alerta_Crisis_Asmatica_Grave
+Resultado: True | pasadas: 2 | reglas disparadas: 6
+  Paso 1: RESP_07: Episodios_Recurrentes AND Sibilancias -> Sig_Broncoespasmo_Recurrente
+  Paso 2: RESP_13: Sig_Broncoespasmo_Recurrente AND Tos_Seca -> Sin_Crisis_Asmatica
+  Paso 3: RESP_36: Dificultad_Respiratoria AND Sin_Crisis_Asmatica -> PreDx_Patron_Asma
+  Paso 4: RESP_42: Sibilancias AND Tos_Seca -> Sig_Obstruccion_Respiratoria
+  Paso 5: RESP_20: PreDx_Patron_Asma -> Dx_Asma
+  Paso 6: RESP_26: Dx_Asma AND Saturacion_Oxigeno_Baja -> Alerta_Crisis_Asmatica_Grave
+
+Caso 9: Neumonia: cianosis y confusion
+Hechos iniciales: Fiebre, Dificultad_Respiratoria, Taquipnea, Crepitantes_Pulmonares, Tos_Productiva, Dolor_Toracico, Cianosis, Confusion
+Objetivo: Alerta_Gravedad_Extrema
+Resultado: True | pasadas: 2 | reglas disparadas: 7
+  Paso 1: RESP_04: Dificultad_Respiratoria AND Taquipnea -> Sig_Distres_Respiratorio
+  Paso 2: RESP_11: Crepitantes_Pulmonares AND Fiebre AND Sig_Distres_Respiratorio -> Sin_Sindrome_Neumonico
+  Paso 3: RESP_34: Dolor_Toracico AND Sin_Sindrome_Neumonico AND Tos_Productiva -> PreDx_Patron_Neumonia
+  Paso 4: RESP_39: Dolor_Toracico AND Tos_Productiva -> Sig_Tos_Con_Dolor_Toracico
+  Paso 5: RESP_40: Crepitantes_Pulmonares AND Taquipnea -> Sig_Hallazgos_Pulmonares
+  Paso 6: RESP_18: PreDx_Patron_Neumonia -> Dx_Neumonia
+  Paso 7: RESP_22: Cianosis AND Dx_Neumonia -> Alerta_Gravedad_Extrema
+
+Caso 10: COVID-19 con alerta
+Hechos iniciales: Fiebre, Escalofrios, Dolor_Muscular, Cefalea, Dolor_Articular, Inicio_Subito, Perdida_Olfato_Gusto, Dificultad_Respiratoria, Saturacion_Oxigeno_Baja
+Objetivo: Alerta_Gravedad_Extrema
+Resultado: True | pasadas: 2 | reglas disparadas: 8
+  Paso 1: RESP_01: Escalofrios AND Fiebre -> Sig_Cuadro_Febrile
+  Paso 2: RESP_06: Cefalea AND Dolor_Articular AND Dolor_Muscular -> Sig_Dolor_Sistemico
+  Paso 3: RESP_08: Inicio_Subito AND Sig_Cuadro_Febrile AND Sig_Dolor_Sistemico -> Sin_Sindrome_Gripal
+  Paso 4: RESP_31: Perdida_Olfato_Gusto AND Sin_Sindrome_Gripal -> PreDx_Patron_COVID19
+  Paso 5: RESP_37: Dolor_Muscular AND Fiebre -> Sig_Sintomas_Generales
+  Paso 6: RESP_43: Cefalea AND Dolor_Muscular -> Sig_Malestar_General
+  Paso 7: RESP_15: PreDx_Patron_COVID19 -> Dx_COVID19
+  Paso 8: RESP_24: Dificultad_Respiratoria AND Dx_COVID19 AND Saturacion_Oxigeno_Baja -> Alerta_Gravedad_Extrema
+
+Caso 11: Gripe con alerta
+Hechos iniciales: Fiebre, Escalofrios, Dolor_Muscular, Cefalea, Dolor_Articular, Inicio_Subito, Tos_Seca, Dificultad_Respiratoria
+Objetivo: Alerta_Complicacion_Respiratoria
+Resultado: True | pasadas: 2 | reglas disparadas: 8
+  Paso 1: RESP_01: Escalofrios AND Fiebre -> Sig_Cuadro_Febrile
+  Paso 2: RESP_06: Cefalea AND Dolor_Articular AND Dolor_Muscular -> Sig_Dolor_Sistemico
+  Paso 3: RESP_08: Inicio_Subito AND Sig_Cuadro_Febrile AND Sig_Dolor_Sistemico -> Sin_Sindrome_Gripal
+  Paso 4: RESP_30: Sin_Sindrome_Gripal AND Tos_Seca -> PreDx_Patron_Gripal
+  Paso 5: RESP_37: Dolor_Muscular AND Fiebre -> Sig_Sintomas_Generales
+  Paso 6: RESP_43: Cefalea AND Dolor_Muscular -> Sig_Malestar_General
+  Paso 7: RESP_14: PreDx_Patron_Gripal -> Dx_Gripe
+  Paso 8: RESP_28: Dificultad_Respiratoria AND Dx_Gripe -> Alerta_Complicacion_Respiratoria
+
