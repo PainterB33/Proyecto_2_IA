@@ -6,7 +6,7 @@
         "Fiebre",
         "Escalofrios"
       ],
-      "consecuente": "Sig_Cuadro_Febrile"
+      "consecuente": "Sig_Cuadro_Febril"
     },
     {
       "id": "RESP_02",
@@ -60,7 +60,7 @@
     {
       "id": "RESP_08",
       "antecedentes": [
-        "Sig_Cuadro_Febrile",
+        "Sig_Cuadro_Febril",
         "Sig_Dolor_Sistemico",
         "Inicio_Subito"
       ],
@@ -330,8 +330,8 @@
     {
       "id": "RESP_42",
       "antecedentes": [
-        "Tos_Seca",
-        "Sibilancias"
+        "Sibilancias",
+        "Dificultad_Respiratoria"
       ],
       "consecuente": "Sig_Obstruccion_Respiratoria"
     },
@@ -356,7 +356,7 @@
       "id": "RESP_45",
       "antecedentes": [
         "Sig_Irritacion_Respiratoria_Alta",
-        "Dolor_Garganta"
+        "Fatiga"
       ],
       "consecuente": "Sin_Sindrome_Respiratorio_Alto"
     },
@@ -372,8 +372,8 @@
       "id": "RESP_47",
       "antecedentes": [
         "Sig_Hallazgos_Pulmonares",
-        "Dificultad_Respiratoria",
-        "Fiebre"
+        "Fiebre",
+        "Escalofrios"
       ],
       "consecuente": "Sin_Sindrome_Neumonico"
     },
@@ -382,7 +382,7 @@
       "antecedentes": [
         "Sig_Deterioro_General",
         "Sudoracion_Nocturna",
-        "Perdida_Apetito"
+        "Fiebre"
       ],
       "consecuente": "Sin_Sindrome_Consuntivo"
     },

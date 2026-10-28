@@ -21,7 +21,7 @@
     "Dx_Resfriado_Comun": 4,
     "Dx_Tuberculosis": 4
   },
-  "cantidad_casos_clinicos": 11,
+  "cantidad_casos_clinicos": 13,
   "casos_clinicos": [
     {
       "nombre": "Gripe",
@@ -41,7 +41,7 @@
       "traza": [
         {
           "regla": "RESP_01",
-          "hecho": "Sig_Cuadro_Febrile"
+          "hecho": "Sig_Cuadro_Febril"
         },
         {
           "regla": "RESP_06",
@@ -98,7 +98,7 @@
       "traza": [
         {
           "regla": "RESP_01",
-          "hecho": "Sig_Cuadro_Febrile"
+          "hecho": "Sig_Cuadro_Febril"
         },
         {
           "regla": "RESP_06",
@@ -189,8 +189,7 @@
         "RESP_21",
         "RESP_34",
         "RESP_39",
-        "RESP_40",
-        "RESP_47"
+        "RESP_40"
       ]
     },
     {
@@ -239,8 +238,7 @@
         "RESP_19",
         "RESP_25",
         "RESP_35",
-        "RESP_41",
-        "RESP_48"
+        "RESP_41"
       ]
     },
     {
@@ -257,7 +255,7 @@
       "traza": [
         {
           "regla": "RESP_01",
-          "hecho": "Sig_Cuadro_Febrile"
+          "hecho": "Sig_Cuadro_Febril"
         }
       ],
       "reglas_activadas": [
@@ -349,6 +347,10 @@
           "hecho": "Sig_Tos_Con_Dolor_Toracico"
         },
         {
+          "regla": "RESP_42",
+          "hecho": "Sig_Obstruccion_Respiratoria"
+        },
+        {
           "regla": "RESP_17",
           "hecho": "Dx_Bronquitis"
         },
@@ -365,6 +367,7 @@
         "RESP_27",
         "RESP_33",
         "RESP_39",
+        "RESP_42",
         "RESP_46"
       ]
     },
@@ -471,8 +474,7 @@
         "RESP_23",
         "RESP_34",
         "RESP_39",
-        "RESP_40",
-        "RESP_47"
+        "RESP_40"
       ]
     },
     {
@@ -495,7 +497,7 @@
       "traza": [
         {
           "regla": "RESP_01",
-          "hecho": "Sig_Cuadro_Febrile"
+          "hecho": "Sig_Cuadro_Febril"
         },
         {
           "regla": "RESP_06",
@@ -558,7 +560,7 @@
       "traza": [
         {
           "regla": "RESP_01",
-          "hecho": "Sig_Cuadro_Febrile"
+          "hecho": "Sig_Cuadro_Febril"
         },
         {
           "regla": "RESP_06",
@@ -600,6 +602,98 @@
         "RESP_43",
         "RESP_44",
         "RESP_50"
+      ]
+    },
+    {
+      "nombre": "Neumonia sin dificultad respiratoria",
+      "hechos": [
+        "Fiebre",
+        "Escalofrios",
+        "Taquipnea",
+        "Crepitantes_Pulmonares",
+        "Tos_Productiva",
+        "Dolor_Toracico"
+      ],
+      "objetivo": "Dx_Neumonia",
+      "esperado": true,
+      "obtenido": true,
+      "aprobado": true,
+      "traza": [
+        {
+          "regla": "RESP_01",
+          "hecho": "Sig_Cuadro_Febril"
+        },
+        {
+          "regla": "RESP_39",
+          "hecho": "Sig_Tos_Con_Dolor_Toracico"
+        },
+        {
+          "regla": "RESP_40",
+          "hecho": "Sig_Hallazgos_Pulmonares"
+        },
+        {
+          "regla": "RESP_47",
+          "hecho": "Sin_Sindrome_Neumonico"
+        },
+        {
+          "regla": "RESP_34",
+          "hecho": "PreDx_Patron_Neumonia"
+        },
+        {
+          "regla": "RESP_18",
+          "hecho": "Dx_Neumonia"
+        }
+      ],
+      "reglas_activadas": [
+        "RESP_01",
+        "RESP_18",
+        "RESP_34",
+        "RESP_39",
+        "RESP_40",
+        "RESP_47"
+      ]
+    },
+    {
+      "nombre": "Tuberculosis por deterioro general",
+      "hechos": [
+        "Perdida_Peso",
+        "Fatiga",
+        "Sudoracion_Nocturna",
+        "Fiebre",
+        "Tos_Prolongada"
+      ],
+      "objetivo": "Dx_Tuberculosis",
+      "esperado": true,
+      "obtenido": true,
+      "aprobado": true,
+      "traza": [
+        {
+          "regla": "RESP_05",
+          "hecho": "Sig_Proceso_Sistemico"
+        },
+        {
+          "regla": "RESP_41",
+          "hecho": "Sig_Deterioro_General"
+        },
+        {
+          "regla": "RESP_48",
+          "hecho": "Sin_Sindrome_Consuntivo"
+        },
+        {
+          "regla": "RESP_35",
+          "hecho": "PreDx_Patron_Tuberculosis"
+        },
+        {
+          "regla": "RESP_19",
+          "hecho": "Dx_Tuberculosis"
+        }
+      ],
+      "reglas_activadas": [
+        "RESP_05",
+        "RESP_19",
+        "RESP_35",
+        "RESP_41",
+        "RESP_48"
       ]
     }
   ],
