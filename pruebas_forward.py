@@ -37,7 +37,7 @@ verificar("KB cargada (50 reglas)", len(motor.reglas) == 50)
 
 # Objetivo alcanzable
 ok = motor.ejecutar_inferencia(
-    ["Fiebre", "Escalofrios"], "Sig_Cuadro_Febrile")
+    ["Fiebre", "Escalofrios"], "Sig_Cuadro_Febril")
 verificar("Objetivo alcanzable -> True", ok is True)
 verificar("  traza = [RESP_01]",
           [t["regla"] for t in motor.traza_explicacion] == ["RESP_01"])
@@ -64,14 +64,14 @@ verificar("  RESP_06 no está en la traza",
           all(t["regla"] != "RESP_06" for t in motor.traza_explicacion))
 
 # La traza se reinicia entre ejecuciones
-motor.ejecutar_inferencia(["Fiebre", "Escalofrios"], "Sig_Cuadro_Febrile")
-motor.ejecutar_inferencia(["Fiebre", "Escalofrios"], "Sig_Cuadro_Febrile")
+motor.ejecutar_inferencia(["Fiebre", "Escalofrios"], "Sig_Cuadro_Febril")
+motor.ejecutar_inferencia(["Fiebre", "Escalofrios"], "Sig_Cuadro_Febril")
 verificar("Traza reiniciada entre ejecuciones (1 paso, no 2)",
           len(motor.traza_explicacion) == 1)
 
 # No modifica la lista de hechos del llamador
 hechos = ["Fiebre", "Escalofrios"]
-motor.ejecutar_inferencia(hechos, "Sig_Cuadro_Febrile")
+motor.ejecutar_inferencia(hechos, "Sig_Cuadro_Febril")
 verificar("No modifica la lista de entrada", hechos == ["Fiebre", "Escalofrios"])
 
 # ----------------------------------------------------------

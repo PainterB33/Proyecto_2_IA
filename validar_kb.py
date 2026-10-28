@@ -105,6 +105,19 @@ CASOS = [
         "Alerta_Complicacion_Respiratoria",
         True
     ),
+    (
+        "Neumonia sin dificultad respiratoria",
+        "Fiebre Escalofrios Taquipnea Crepitantes_Pulmonares "
+        "Tos_Productiva Dolor_Toracico",
+        "Dx_Neumonia",
+        True
+    ),
+    (
+        "Tuberculosis por deterioro general",
+        "Perdida_Peso Fatiga Sudoracion_Nocturna Fiebre Tos_Prolongada",
+        "Dx_Tuberculosis",
+        True
+    ),
 ]
 
 
