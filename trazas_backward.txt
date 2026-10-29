@@ -1,0 +1,478 @@
+TRAZAS DEL MOTOR HACIA ATRÁS (BACKWARD CHAINING)
+==================================================
+
+Caso 1: Gripe
+Hechos iniciales: Fiebre, Escalofrios, Dolor_Muscular, Cefalea, Dolor_Articular, Inicio_Subito, Tos_Seca
+Objetivo: Dx_Gripe
+Resultado: True | llamadas: 12 | profundidad máx: 4 | reglas en la prueba: 5
+Reglas de la prueba (orden): RESP_01, RESP_06, RESP_08, RESP_30, RESP_14
+  META: Dx_Gripe
+  USAR_REGLA: Dx_Gripe [RESP_14]
+    META: PreDx_Patron_Gripal
+    USAR_REGLA: PreDx_Patron_Gripal [RESP_30]
+      META: Sin_Sindrome_Gripal
+      USAR_REGLA: Sin_Sindrome_Gripal [RESP_08]
+        META: Inicio_Subito
+        HECHO: Inicio_Subito
+        META: Sig_Cuadro_Febril
+        USAR_REGLA: Sig_Cuadro_Febril [RESP_01]
+          META: Escalofrios
+          HECHO: Escalofrios
+          META: Fiebre
+          HECHO: Fiebre
+        PROBADO: Sig_Cuadro_Febril [RESP_01]
+        META: Sig_Dolor_Sistemico
+        USAR_REGLA: Sig_Dolor_Sistemico [RESP_06]
+          META: Cefalea
+          HECHO: Cefalea
+          META: Dolor_Articular
+          HECHO: Dolor_Articular
+          META: Dolor_Muscular
+          HECHO: Dolor_Muscular
+        PROBADO: Sig_Dolor_Sistemico [RESP_06]
+      PROBADO: Sin_Sindrome_Gripal [RESP_08]
+      META: Tos_Seca
+      HECHO: Tos_Seca
+    PROBADO: PreDx_Patron_Gripal [RESP_30]
+  PROBADO: Dx_Gripe [RESP_14]
+
+Caso 2: COVID-19
+Hechos iniciales: Fiebre, Escalofrios, Dolor_Muscular, Cefalea, Dolor_Articular, Inicio_Subito, Perdida_Olfato_Gusto
+Objetivo: Dx_COVID19
+Resultado: True | llamadas: 12 | profundidad máx: 4 | reglas en la prueba: 5
+Reglas de la prueba (orden): RESP_01, RESP_06, RESP_08, RESP_31, RESP_15
+  META: Dx_COVID19
+  USAR_REGLA: Dx_COVID19 [RESP_15]
+    META: PreDx_Patron_COVID19
+    USAR_REGLA: PreDx_Patron_COVID19 [RESP_31]
+      META: Perdida_Olfato_Gusto
+      HECHO: Perdida_Olfato_Gusto
+      META: Sin_Sindrome_Gripal
+      USAR_REGLA: Sin_Sindrome_Gripal [RESP_08]
+        META: Inicio_Subito
+        HECHO: Inicio_Subito
+        META: Sig_Cuadro_Febril
+        USAR_REGLA: Sig_Cuadro_Febril [RESP_01]
+          META: Escalofrios
+          HECHO: Escalofrios
+          META: Fiebre
+          HECHO: Fiebre
+        PROBADO: Sig_Cuadro_Febril [RESP_01]
+        META: Sig_Dolor_Sistemico
+        USAR_REGLA: Sig_Dolor_Sistemico [RESP_06]
+          META: Cefalea
+          HECHO: Cefalea
+          META: Dolor_Articular
+          HECHO: Dolor_Articular
+          META: Dolor_Muscular
+          HECHO: Dolor_Muscular
+        PROBADO: Sig_Dolor_Sistemico [RESP_06]
+      PROBADO: Sin_Sindrome_Gripal [RESP_08]
+    PROBADO: PreDx_Patron_COVID19 [RESP_31]
+  PROBADO: Dx_COVID19 [RESP_15]
+
+Caso 3: Neumonia con alerta
+Hechos iniciales: Fiebre, Dificultad_Respiratoria, Taquipnea, Crepitantes_Pulmonares, Tos_Productiva, Dolor_Toracico, Saturacion_Oxigeno_Baja
+Objetivo: Alerta_Gravedad_Extrema
+Resultado: True | llamadas: 12 | profundidad máx: 5 | reglas en la prueba: 5
+Reglas de la prueba (orden): RESP_04, RESP_11, RESP_34, RESP_18, RESP_21
+  META: Alerta_Gravedad_Extrema
+  USAR_REGLA: Alerta_Gravedad_Extrema [RESP_21]
+    META: Dx_Neumonia
+    USAR_REGLA: Dx_Neumonia [RESP_18]
+      META: PreDx_Patron_Neumonia
+      USAR_REGLA: PreDx_Patron_Neumonia [RESP_34]
+        META: Dolor_Toracico
+        HECHO: Dolor_Toracico
+        META: Sin_Sindrome_Neumonico
+        USAR_REGLA: Sin_Sindrome_Neumonico [RESP_11]
+          META: Crepitantes_Pulmonares
+          HECHO: Crepitantes_Pulmonares
+          META: Fiebre
+          HECHO: Fiebre
+          META: Sig_Distres_Respiratorio
+          USAR_REGLA: Sig_Distres_Respiratorio [RESP_04]
+            META: Dificultad_Respiratoria
+            HECHO: Dificultad_Respiratoria
+            META: Taquipnea
+            HECHO: Taquipnea
+          PROBADO: Sig_Distres_Respiratorio [RESP_04]
+        PROBADO: Sin_Sindrome_Neumonico [RESP_11]
+        META: Tos_Productiva
+        HECHO: Tos_Productiva
+      PROBADO: PreDx_Patron_Neumonia [RESP_34]
+    PROBADO: Dx_Neumonia [RESP_18]
+    META: Saturacion_Oxigeno_Baja
+    HECHO: Saturacion_Oxigeno_Baja
+  PROBADO: Alerta_Gravedad_Extrema [RESP_21]
+
+Caso 4: Tuberculosis con alerta
+Hechos iniciales: Perdida_Peso, Sudoracion_Nocturna, Fatiga, Perdida_Apetito, Tos_Prolongada, Hemoptisis
+Objetivo: Alerta_Riesgo_Alto
+Resultado: True | llamadas: 11 | profundidad máx: 5 | reglas en la prueba: 5
+Reglas de la prueba (orden): RESP_05, RESP_12, RESP_35, RESP_19, RESP_25
+  META: Alerta_Riesgo_Alto
+  USAR_REGLA: Alerta_Riesgo_Alto [RESP_25]
+    META: Dx_Tuberculosis
+    USAR_REGLA: Dx_Tuberculosis [RESP_19]
+      META: PreDx_Patron_Tuberculosis
+      USAR_REGLA: PreDx_Patron_Tuberculosis [RESP_35]
+        META: Sin_Sindrome_Consuntivo
+        USAR_REGLA: Sin_Sindrome_Consuntivo [RESP_12]
+          META: Fatiga
+          HECHO: Fatiga
+          META: Perdida_Apetito
+          HECHO: Perdida_Apetito
+          META: Sig_Proceso_Sistemico
+          USAR_REGLA: Sig_Proceso_Sistemico [RESP_05]
+            META: Perdida_Peso
+            HECHO: Perdida_Peso
+            META: Sudoracion_Nocturna
+            HECHO: Sudoracion_Nocturna
+          PROBADO: Sig_Proceso_Sistemico [RESP_05]
+        PROBADO: Sin_Sindrome_Consuntivo [RESP_12]
+        META: Tos_Prolongada
+        HECHO: Tos_Prolongada
+      PROBADO: PreDx_Patron_Tuberculosis [RESP_35]
+    PROBADO: Dx_Tuberculosis [RESP_19]
+    META: Hemoptisis
+    HECHO: Hemoptisis
+  PROBADO: Alerta_Riesgo_Alto [RESP_25]
+
+Caso 5: No demostrable
+Hechos iniciales: Fiebre, Escalofrios, Tos_Seca
+Objetivo: Dx_COVID19
+Resultado: False | llamadas: 3 | profundidad máx: 2 | reglas en la prueba: 0
+Reglas de la prueba (orden): (ninguna)
+  META: Dx_COVID19
+  USAR_REGLA: Dx_COVID19 [RESP_15]
+    META: PreDx_Patron_COVID19
+    USAR_REGLA: PreDx_Patron_COVID19 [RESP_31]
+      META: Perdida_Olfato_Gusto
+      SIN_REGLA: Perdida_Olfato_Gusto
+    FALLO: PreDx_Patron_COVID19
+  FALLO: Dx_COVID19
+
+Caso 6: Resfriado con alerta
+Hechos iniciales: Dolor_Garganta, Congestion_Nasal, Tos_Seca, Fatiga, Dificultad_Respiratoria
+Objetivo: Alerta_Complicacion_Respiratoria
+Resultado: True | llamadas: 17 | profundidad máx: 5 | reglas en la prueba: 5
+Reglas de la prueba (orden): RESP_02, RESP_09, RESP_32, RESP_16, RESP_29
+  META: Alerta_Complicacion_Respiratoria
+  USAR_REGLA: Alerta_Complicacion_Respiratoria [RESP_28]
+    META: Dificultad_Respiratoria
+    HECHO: Dificultad_Respiratoria
+    META: Dx_Gripe
+    USAR_REGLA: Dx_Gripe [RESP_14]
+      META: PreDx_Patron_Gripal
+      USAR_REGLA: PreDx_Patron_Gripal [RESP_30]
+        META: Sin_Sindrome_Gripal
+        USAR_REGLA: Sin_Sindrome_Gripal [RESP_08]
+          META: Inicio_Subito
+          SIN_REGLA: Inicio_Subito
+        USAR_REGLA: Sin_Sindrome_Gripal [RESP_44]
+          META: Inicio_Subito
+          MEMO_FALLO: Inicio_Subito
+        USAR_REGLA: Sin_Sindrome_Gripal [RESP_50]
+          META: Escalofrios
+          SIN_REGLA: Escalofrios
+        FALLO: Sin_Sindrome_Gripal
+      FALLO: PreDx_Patron_Gripal
+    FALLO: Dx_Gripe
+  USAR_REGLA: Alerta_Complicacion_Respiratoria [RESP_29]
+    META: Dificultad_Respiratoria
+    HECHO: Dificultad_Respiratoria
+    META: Dx_Resfriado_Comun
+    USAR_REGLA: Dx_Resfriado_Comun [RESP_16]
+      META: PreDx_Patron_Resfriado
+      USAR_REGLA: PreDx_Patron_Resfriado [RESP_32]
+        META: Fatiga
+        HECHO: Fatiga
+        META: Sin_Sindrome_Respiratorio_Alto
+        USAR_REGLA: Sin_Sindrome_Respiratorio_Alto [RESP_09]
+          META: Sig_Inflamacion_Vias_Altas
+          USAR_REGLA: Sig_Inflamacion_Vias_Altas [RESP_02]
+            META: Congestion_Nasal
+            HECHO: Congestion_Nasal
+            META: Dolor_Garganta
+            HECHO: Dolor_Garganta
+          PROBADO: Sig_Inflamacion_Vias_Altas [RESP_02]
+          META: Tos_Seca
+          HECHO: Tos_Seca
+        PROBADO: Sin_Sindrome_Respiratorio_Alto [RESP_09]
+      PROBADO: PreDx_Patron_Resfriado [RESP_32]
+    PROBADO: Dx_Resfriado_Comun [RESP_16]
+  PROBADO: Alerta_Complicacion_Respiratoria [RESP_29]
+
+Caso 7: Bronquitis con alerta
+Hechos iniciales: Tos_Productiva, Sibilancias, Congestion_Nasal, Dolor_Garganta, Dificultad_Respiratoria, Dolor_Toracico
+Objetivo: Alerta_Progresion_Pulmonar
+Resultado: True | llamadas: 10 | profundidad máx: 5 | reglas en la prueba: 5
+Reglas de la prueba (orden): RESP_03, RESP_10, RESP_33, RESP_17, RESP_27
+  META: Alerta_Progresion_Pulmonar
+  USAR_REGLA: Alerta_Progresion_Pulmonar [RESP_27]
+    META: Dificultad_Respiratoria
+    HECHO: Dificultad_Respiratoria
+    META: Dx_Bronquitis
+    USAR_REGLA: Dx_Bronquitis [RESP_17]
+      META: PreDx_Patron_Bronquitis
+      USAR_REGLA: PreDx_Patron_Bronquitis [RESP_33]
+        META: Dolor_Garganta
+        HECHO: Dolor_Garganta
+        META: Sin_Sindrome_Bronquial
+        USAR_REGLA: Sin_Sindrome_Bronquial [RESP_10]
+          META: Congestion_Nasal
+          HECHO: Congestion_Nasal
+          META: Sig_Compromiso_Vias_Bajas
+          USAR_REGLA: Sig_Compromiso_Vias_Bajas [RESP_03]
+            META: Sibilancias
+            HECHO: Sibilancias
+            META: Tos_Productiva
+            HECHO: Tos_Productiva
+          PROBADO: Sig_Compromiso_Vias_Bajas [RESP_03]
+        PROBADO: Sin_Sindrome_Bronquial [RESP_10]
+      PROBADO: PreDx_Patron_Bronquitis [RESP_33]
+    PROBADO: Dx_Bronquitis [RESP_17]
+  PROBADO: Alerta_Progresion_Pulmonar [RESP_27]
+
+Caso 8: Asma con alerta
+Hechos iniciales: Sibilancias, Episodios_Recurrentes, Tos_Seca, Dificultad_Respiratoria, Saturacion_Oxigeno_Baja
+Objetivo: Alerta_Crisis_Asmatica_Grave
+Resultado: True | llamadas: 10 | profundidad máx: 5 | reglas en la prueba: 5
+Reglas de la prueba (orden): RESP_07, RESP_13, RESP_36, RESP_20, RESP_26
+  META: Alerta_Crisis_Asmatica_Grave
+  USAR_REGLA: Alerta_Crisis_Asmatica_Grave [RESP_26]
+    META: Dx_Asma
+    USAR_REGLA: Dx_Asma [RESP_20]
+      META: PreDx_Patron_Asma
+      USAR_REGLA: PreDx_Patron_Asma [RESP_36]
+        META: Dificultad_Respiratoria
+        HECHO: Dificultad_Respiratoria
+        META: Sin_Crisis_Asmatica
+        USAR_REGLA: Sin_Crisis_Asmatica [RESP_13]
+          META: Sig_Broncoespasmo_Recurrente
+          USAR_REGLA: Sig_Broncoespasmo_Recurrente [RESP_07]
+            META: Episodios_Recurrentes
+            HECHO: Episodios_Recurrentes
+            META: Sibilancias
+            HECHO: Sibilancias
+          PROBADO: Sig_Broncoespasmo_Recurrente [RESP_07]
+          META: Tos_Seca
+          HECHO: Tos_Seca
+        PROBADO: Sin_Crisis_Asmatica [RESP_13]
+      PROBADO: PreDx_Patron_Asma [RESP_36]
+    PROBADO: Dx_Asma [RESP_20]
+    META: Saturacion_Oxigeno_Baja
+    HECHO: Saturacion_Oxigeno_Baja
+  PROBADO: Alerta_Crisis_Asmatica_Grave [RESP_26]
+
+Caso 9: Neumonia: cianosis y confusion
+Hechos iniciales: Fiebre, Dificultad_Respiratoria, Taquipnea, Crepitantes_Pulmonares, Tos_Productiva, Dolor_Toracico, Cianosis, Confusion
+Objetivo: Alerta_Gravedad_Extrema
+Resultado: True | llamadas: 14 | profundidad máx: 5 | reglas en la prueba: 5
+Reglas de la prueba (orden): RESP_04, RESP_11, RESP_34, RESP_18, RESP_22
+  META: Alerta_Gravedad_Extrema
+  USAR_REGLA: Alerta_Gravedad_Extrema [RESP_21]
+    META: Dx_Neumonia
+    USAR_REGLA: Dx_Neumonia [RESP_18]
+      META: PreDx_Patron_Neumonia
+      USAR_REGLA: PreDx_Patron_Neumonia [RESP_34]
+        META: Dolor_Toracico
+        HECHO: Dolor_Toracico
+        META: Sin_Sindrome_Neumonico
+        USAR_REGLA: Sin_Sindrome_Neumonico [RESP_11]
+          META: Crepitantes_Pulmonares
+          HECHO: Crepitantes_Pulmonares
+          META: Fiebre
+          HECHO: Fiebre
+          META: Sig_Distres_Respiratorio
+          USAR_REGLA: Sig_Distres_Respiratorio [RESP_04]
+            META: Dificultad_Respiratoria
+            HECHO: Dificultad_Respiratoria
+            META: Taquipnea
+            HECHO: Taquipnea
+          PROBADO: Sig_Distres_Respiratorio [RESP_04]
+        PROBADO: Sin_Sindrome_Neumonico [RESP_11]
+        META: Tos_Productiva
+        HECHO: Tos_Productiva
+      PROBADO: PreDx_Patron_Neumonia [RESP_34]
+    PROBADO: Dx_Neumonia [RESP_18]
+    META: Saturacion_Oxigeno_Baja
+    SIN_REGLA: Saturacion_Oxigeno_Baja
+  USAR_REGLA: Alerta_Gravedad_Extrema [RESP_22]
+    META: Cianosis
+    HECHO: Cianosis
+    META: Dx_Neumonia
+    MEMO_OK: Dx_Neumonia
+  PROBADO: Alerta_Gravedad_Extrema [RESP_22]
+
+Caso 10: COVID-19 con alerta
+Hechos iniciales: Fiebre, Escalofrios, Dolor_Muscular, Cefalea, Dolor_Articular, Inicio_Subito, Perdida_Olfato_Gusto, Dificultad_Respiratoria, Saturacion_Oxigeno_Baja
+Objetivo: Alerta_Gravedad_Extrema
+Resultado: True | llamadas: 20 | profundidad máx: 5 | reglas en la prueba: 6
+Reglas de la prueba (orden): RESP_01, RESP_06, RESP_08, RESP_31, RESP_15, RESP_24
+  META: Alerta_Gravedad_Extrema
+  USAR_REGLA: Alerta_Gravedad_Extrema [RESP_21]
+    META: Dx_Neumonia
+    USAR_REGLA: Dx_Neumonia [RESP_18]
+      META: PreDx_Patron_Neumonia
+      USAR_REGLA: PreDx_Patron_Neumonia [RESP_34]
+        META: Dolor_Toracico
+        SIN_REGLA: Dolor_Toracico
+      FALLO: PreDx_Patron_Neumonia
+    FALLO: Dx_Neumonia
+  USAR_REGLA: Alerta_Gravedad_Extrema [RESP_22]
+    META: Cianosis
+    SIN_REGLA: Cianosis
+  USAR_REGLA: Alerta_Gravedad_Extrema [RESP_23]
+    META: Confusion
+    SIN_REGLA: Confusion
+  USAR_REGLA: Alerta_Gravedad_Extrema [RESP_24]
+    META: Dificultad_Respiratoria
+    HECHO: Dificultad_Respiratoria
+    META: Dx_COVID19
+    USAR_REGLA: Dx_COVID19 [RESP_15]
+      META: PreDx_Patron_COVID19
+      USAR_REGLA: PreDx_Patron_COVID19 [RESP_31]
+        META: Perdida_Olfato_Gusto
+        HECHO: Perdida_Olfato_Gusto
+        META: Sin_Sindrome_Gripal
+        USAR_REGLA: Sin_Sindrome_Gripal [RESP_08]
+          META: Inicio_Subito
+          HECHO: Inicio_Subito
+          META: Sig_Cuadro_Febril
+          USAR_REGLA: Sig_Cuadro_Febril [RESP_01]
+            META: Escalofrios
+            HECHO: Escalofrios
+            META: Fiebre
+            HECHO: Fiebre
+          PROBADO: Sig_Cuadro_Febril [RESP_01]
+          META: Sig_Dolor_Sistemico
+          USAR_REGLA: Sig_Dolor_Sistemico [RESP_06]
+            META: Cefalea
+            HECHO: Cefalea
+            META: Dolor_Articular
+            HECHO: Dolor_Articular
+            META: Dolor_Muscular
+            HECHO: Dolor_Muscular
+          PROBADO: Sig_Dolor_Sistemico [RESP_06]
+        PROBADO: Sin_Sindrome_Gripal [RESP_08]
+      PROBADO: PreDx_Patron_COVID19 [RESP_31]
+    PROBADO: Dx_COVID19 [RESP_15]
+    META: Saturacion_Oxigeno_Baja
+    HECHO: Saturacion_Oxigeno_Baja
+  PROBADO: Alerta_Gravedad_Extrema [RESP_24]
+
+Caso 11: Gripe con alerta
+Hechos iniciales: Fiebre, Escalofrios, Dolor_Muscular, Cefalea, Dolor_Articular, Inicio_Subito, Tos_Seca, Dificultad_Respiratoria
+Objetivo: Alerta_Complicacion_Respiratoria
+Resultado: True | llamadas: 14 | profundidad máx: 5 | reglas en la prueba: 6
+Reglas de la prueba (orden): RESP_01, RESP_06, RESP_08, RESP_30, RESP_14, RESP_28
+  META: Alerta_Complicacion_Respiratoria
+  USAR_REGLA: Alerta_Complicacion_Respiratoria [RESP_28]
+    META: Dificultad_Respiratoria
+    HECHO: Dificultad_Respiratoria
+    META: Dx_Gripe
+    USAR_REGLA: Dx_Gripe [RESP_14]
+      META: PreDx_Patron_Gripal
+      USAR_REGLA: PreDx_Patron_Gripal [RESP_30]
+        META: Sin_Sindrome_Gripal
+        USAR_REGLA: Sin_Sindrome_Gripal [RESP_08]
+          META: Inicio_Subito
+          HECHO: Inicio_Subito
+          META: Sig_Cuadro_Febril
+          USAR_REGLA: Sig_Cuadro_Febril [RESP_01]
+            META: Escalofrios
+            HECHO: Escalofrios
+            META: Fiebre
+            HECHO: Fiebre
+          PROBADO: Sig_Cuadro_Febril [RESP_01]
+          META: Sig_Dolor_Sistemico
+          USAR_REGLA: Sig_Dolor_Sistemico [RESP_06]
+            META: Cefalea
+            HECHO: Cefalea
+            META: Dolor_Articular
+            HECHO: Dolor_Articular
+            META: Dolor_Muscular
+            HECHO: Dolor_Muscular
+          PROBADO: Sig_Dolor_Sistemico [RESP_06]
+        PROBADO: Sin_Sindrome_Gripal [RESP_08]
+        META: Tos_Seca
+        HECHO: Tos_Seca
+      PROBADO: PreDx_Patron_Gripal [RESP_30]
+    PROBADO: Dx_Gripe [RESP_14]
+  PROBADO: Alerta_Complicacion_Respiratoria [RESP_28]
+
+Caso 12: Neumonia sin dificultad respiratoria
+Hechos iniciales: Fiebre, Escalofrios, Taquipnea, Crepitantes_Pulmonares, Tos_Productiva, Dolor_Toracico
+Objetivo: Dx_Neumonia
+Resultado: True | llamadas: 14 | profundidad máx: 4 | reglas en la prueba: 4
+Reglas de la prueba (orden): RESP_40, RESP_47, RESP_34, RESP_18
+  META: Dx_Neumonia
+  USAR_REGLA: Dx_Neumonia [RESP_18]
+    META: PreDx_Patron_Neumonia
+    USAR_REGLA: PreDx_Patron_Neumonia [RESP_34]
+      META: Dolor_Toracico
+      HECHO: Dolor_Toracico
+      META: Sin_Sindrome_Neumonico
+      USAR_REGLA: Sin_Sindrome_Neumonico [RESP_11]
+        META: Crepitantes_Pulmonares
+        HECHO: Crepitantes_Pulmonares
+        META: Fiebre
+        HECHO: Fiebre
+        META: Sig_Distres_Respiratorio
+        USAR_REGLA: Sig_Distres_Respiratorio [RESP_04]
+          META: Dificultad_Respiratoria
+          SIN_REGLA: Dificultad_Respiratoria
+        FALLO: Sig_Distres_Respiratorio
+      USAR_REGLA: Sin_Sindrome_Neumonico [RESP_47]
+        META: Escalofrios
+        HECHO: Escalofrios
+        META: Fiebre
+        HECHO: Fiebre
+        META: Sig_Hallazgos_Pulmonares
+        USAR_REGLA: Sig_Hallazgos_Pulmonares [RESP_40]
+          META: Crepitantes_Pulmonares
+          HECHO: Crepitantes_Pulmonares
+          META: Taquipnea
+          HECHO: Taquipnea
+        PROBADO: Sig_Hallazgos_Pulmonares [RESP_40]
+      PROBADO: Sin_Sindrome_Neumonico [RESP_47]
+      META: Tos_Productiva
+      HECHO: Tos_Productiva
+    PROBADO: PreDx_Patron_Neumonia [RESP_34]
+  PROBADO: Dx_Neumonia [RESP_18]
+
+Caso 13: Tuberculosis por deterioro general
+Hechos iniciales: Perdida_Peso, Fatiga, Sudoracion_Nocturna, Fiebre, Tos_Prolongada
+Objetivo: Dx_Tuberculosis
+Resultado: True | llamadas: 11 | profundidad máx: 4 | reglas en la prueba: 4
+Reglas de la prueba (orden): RESP_41, RESP_48, RESP_35, RESP_19
+  META: Dx_Tuberculosis
+  USAR_REGLA: Dx_Tuberculosis [RESP_19]
+    META: PreDx_Patron_Tuberculosis
+    USAR_REGLA: PreDx_Patron_Tuberculosis [RESP_35]
+      META: Sin_Sindrome_Consuntivo
+      USAR_REGLA: Sin_Sindrome_Consuntivo [RESP_12]
+        META: Fatiga
+        HECHO: Fatiga
+        META: Perdida_Apetito
+        SIN_REGLA: Perdida_Apetito
+      USAR_REGLA: Sin_Sindrome_Consuntivo [RESP_48]
+        META: Fiebre
+        HECHO: Fiebre
+        META: Sig_Deterioro_General
+        USAR_REGLA: Sig_Deterioro_General [RESP_41]
+          META: Fatiga
+          HECHO: Fatiga
+          META: Perdida_Peso
+          HECHO: Perdida_Peso
+        PROBADO: Sig_Deterioro_General [RESP_41]
+        META: Sudoracion_Nocturna
+        HECHO: Sudoracion_Nocturna
+      PROBADO: Sin_Sindrome_Consuntivo [RESP_48]
+      META: Tos_Prolongada
+      HECHO: Tos_Prolongada
+    PROBADO: PreDx_Patron_Tuberculosis [RESP_35]
+  PROBADO: Dx_Tuberculosis [RESP_19]
+
